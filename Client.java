@@ -8,7 +8,6 @@ import java.net.Socket;
 // import javafx.scene.paint.Color;
 import java.util.*;
 import java.text.*;
-import java.net.*;
 import java.io.*;
 
 public class Client extends JFrame implements ActionListener {
