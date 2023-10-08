@@ -161,23 +161,24 @@ public class Client extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new Client();
         try {
-            Socket s = new Socket("127.0.0.1", 6001);
-            DataInputStream din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
+            try (Socket s = new Socket("127.0.0.1", 6001)) {
+                DataInputStream din = new DataInputStream(s.getInputStream());
+                dout = new DataOutputStream(s.getOutputStream());
 
-            while (true) {
-                a1.setLayout(new BorderLayout());
-                String msg = din.readUTF();
-                JPanel panel = formatLabel(msg);
+                while (true) {
+                    a1.setLayout(new BorderLayout());
+                    String msg = din.readUTF();
+                    JPanel panel = formatLabel(msg);
 
-                JPanel left = new JPanel(new BorderLayout());
-                left.add(panel, BorderLayout.LINE_START);
-                vertical.add(left);
+                    JPanel left = new JPanel(new BorderLayout());
+                    left.add(panel, BorderLayout.LINE_START);
+                    vertical.add(left);
 
-                vertical.add(Box.createVerticalStrut(15));
-                a1.add(vertical, BorderLayout.PAGE_START);
+                    vertical.add(Box.createVerticalStrut(15));
+                    a1.add(vertical, BorderLayout.PAGE_START);
 
-                f.validate();
+                    f.validate();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
